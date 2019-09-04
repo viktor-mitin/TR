@@ -1,0 +1,5 @@
+--region us-east-1
+--profile default
+vault_username UC261016
+push_notification False
+username viktor.mitin
