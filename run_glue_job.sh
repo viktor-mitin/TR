@@ -17,6 +17,17 @@ set -u
 JOB_NAME="$1"
 SLEEP_TIME=3
 
+print_log_group_output ()
+{
+    echo
+    OUTPUT=$(aws logs get-log-events --log-group-name $1 \
+                  --log-stream-name $JR | jq '.events[0] | .message' | tr -d '"' )
+
+    echo "$OUTPUT"
+    echo
+}
+
+
 #MAX_CONC_RUNS=$(aws glue get-job --job-name $JOB_NAME | jq '.Job.ExecutionProperty.MaxConcurrentRuns')
 #echo "MAX RUNS: $MAX_CONC_RUNS"
 #
@@ -45,25 +56,13 @@ while true; do
     sleep $SLEEP_TIME
 done
 
+#check if needs to print error logs
 if echo $STATE | grep -q FAILED; then
     echo
     echo "ERROR - the job run has FAILED with the next errors:"
-    echo
-    #get job run output
-    OUTPUT=$(aws logs get-log-events --log-group-name /aws-glue/python-jobs/error\
-                  --log-stream-name $JR | jq '.events[0] | .message' | tr -d '"' )
-
-    #pretty print output
-    echo "$OUTPUT"
-    echo
+    print_log_group_output /aws-glue/python-jobs/error
 fi
 
 #get job run output
-echo
-#echo "The job run output:"
-OUTPUT=$(aws logs get-log-events --log-group-name /aws-glue/python-jobs/output\
-              --log-stream-name $JR | jq '.events[0] | .message' | tr -d '"' )
-
-echo "$OUTPUT"
-echo
+print_log_group_output /aws-glue/python-jobs/output
 
