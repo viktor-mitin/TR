@@ -17,11 +17,20 @@ set -u
 JOB_NAME="$1"
 SLEEP_TIME=3
 
-#check if there are running jobs and wait until completed
-while aws glue get-job-runs --job-name Tests | grep -q RUNNING; do
-    echo "The job is already running, wait and retry"
-    sleep $SLEEP_TIME
-done
+#MAX_CONC_RUNS=$(aws glue get-job --job-name $JOB_NAME | jq '.Job.ExecutionProperty.MaxConcurrentRuns')
+#echo "MAX RUNS: $MAX_CONC_RUNS"
+#
+##echo "Check if there are running jobs and wait until completed"
+#while true; do
+#    CURR_RUNS=$(aws glue get-job-runs --job-name $JOB_NAME | grep RUNNING | wc -l)
+#    echo "CURR RUNS: $CURR_RUNS"
+#    if [ $CURR_RUNS -lt $MAX_CONC_RUNS ]; then
+#        break;
+#    else
+#        echo "The max number of concurent running job is reached, wait and retry"
+#        sleep $SLEEP_TIME
+#    fi
+#done
 
 #get job run id
 JR=$(aws glue start-job-run --job-name $JOB_NAME  | jq '.JobRunId' | tr -d '"')
@@ -38,7 +47,7 @@ done
 
 if echo $STATE | grep -q FAILED; then
     echo
-    echo "ERROR - the job has FAILED with the next errors:"
+    echo "ERROR - the job run has FAILED with the next errors:"
     echo
     #get job run output
     OUTPUT=$(aws logs get-log-events --log-group-name /aws-glue/python-jobs/error\
@@ -55,7 +64,6 @@ echo
 OUTPUT=$(aws logs get-log-events --log-group-name /aws-glue/python-jobs/output\
               --log-stream-name $JR | jq '.events[0] | .message' | tr -d '"' )
 
-#pretty print output
 echo "$OUTPUT"
 echo
 
