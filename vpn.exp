@@ -1,0 +1,27 @@
+#!/usr/bin/expect
+
+#This script connects to cisco anyconnect vpn with MFA with
+#https://github.com/dlenski/python-vipaccess
+
+set timeout 60
+log_file /home/c/w/tr_vpn.log
+
+#set vip_code [lindex $argv 0];
+set vip_code [exec vipaccess show]
+set pass [exec cat /etc/p_example.txt]
+set server [exec cat /etc/s_example.txt]
+
+eval spawn /opt/cisco/anyconnect/bin/vpn connect $server
+
+expect "2)" { send "2\r" }
+expect "Username: " { send "\r" }
+expect "Password: " { send $pass\r" }
+expect "Second "    { send "$vip_code\r" }
+expect "accept? "   { send "y\r" }
+
+expect "VPN>"
+
+###disabled, unstable
+#set led [exec sudo sh -c "setleds -D +num < /dev/tty7"]
+
+exit
