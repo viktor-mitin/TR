@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 #This script gets Vault password using MFA and saves it to the file
+
 file_path='/home/c/w/v_pass.txt'
 
 import time
@@ -57,9 +58,8 @@ while True:
 elem = driver.find_element_by_xpath("//*[contains(@class,'account-password-display')]")
 
 #print(elem.text)
-f=open(file_path,"w")
-f.write(elem.text)
-f.close()
+with open(file_path,"w") as f:
+    f.write(elem.text)
 
 driver.close()
 sys.exit(0)
