@@ -13,20 +13,34 @@ import subprocess
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-from selenium.webdriver.firefox.options import Options
-options = Options()
-options.add_argument('--headless')
+#from selenium.webdriver.firefox.options import Options
+#options = Options()
+#options.add_argument('--headless')
 #driver = webdriver.Firefox(options=options)
 
-driver = webdriver.Firefox()
+#driver = webdriver.Firefox()
 
-driver.implicitly_wait(15)
+#driver = webdriver.Chrome()
+
+options = webdriver.ChromeOptions()
+#options.add_argument('--headless')
+#options.add_argument('--profile-directory=Default')
+options.add_argument("user-data-dir=/home/c/.config/google-chrome") #Path to your chrome profile
+driver = webdriver.Chrome(chrome_options=options)
+
+driver.implicitly_wait(7)
+#driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 't')
 driver.get(url)
 
-elem = driver.find_element_by_xpath("//*[contains(@id,'SignInButton')]")
-elem.click()
+try:
+    elem = driver.find_element_by_xpath("//*[contains(@id,'SignInButton')]")
+    elem.click()
+    print("no exception")
+except:
+    None
 
-time.sleep(2)
+#time.sleep(2)
+#try:
 elem = driver.find_element_by_xpath("//*[contains(@id,'userNameInput')]")
 elem.send_keys("mc261016@mgmt.tlrg.com")
 
@@ -38,12 +52,15 @@ with open(file_path, 'r') as file:
 elem.send_keys(p)
 elem.send_keys(Keys.RETURN)
 
+print("entered credentials")
 elem = driver.find_element_by_xpath("//input[contains(@id,'idp_GoButton')]")
 elem.click()
-print("after GoButton")
-time.sleep(5)
+print("clicked go button")
+#except:
+#    None
 
-
+#time.sleep(3)
 #driver.close()
+#print("driver closed")
 sys.exit(0)
 
