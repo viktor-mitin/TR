@@ -12,7 +12,7 @@ fi
 
 
 echo Vault login to cloud-tool
-cloud-tool -vv vault-login  -m `vipaccess` --account-id '074929092668' --role 'human-role/a205718-PowerUser2'
+cloud-tool -vv vault-login  -m `/home/c/.local/bin/vipaccess` --account-id '074929092668' --role 'human-role/a205718-PowerUser2'
 
 echo Get vault pass
 ~/w/TR/get_vault_pass.py
