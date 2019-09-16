@@ -32,12 +32,12 @@ driver.implicitly_wait(7)
 #driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 't')
 driver.get(url)
 
-try:
-    elem = driver.find_element_by_xpath("//*[contains(@id,'SignInButton')]")
-    elem.click()
-    print("no exception")
-except:
-    None
+#try:
+elem = driver.find_element_by_xpath("//*[contains(@id,'SignInButton')]")
+elem.click()
+print("no exception")
+#except:
+#    None
 
 #time.sleep(2)
 #try:
