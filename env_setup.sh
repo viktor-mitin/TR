@@ -1,6 +1,6 @@
 #!/bin/sh
 
-date > ~/w/tr_env_setup.log
+date
 
 if /opt/cisco/anyconnect/bin/vpn state | grep -q Connected ; then
     echo Connected to VPN, ok
