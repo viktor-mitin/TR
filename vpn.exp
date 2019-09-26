@@ -7,7 +7,7 @@ set timeout 60
 log_file /home/c/w/tr_vpn.log
 
 #set vip_code [lindex $argv 0];
-set vip_code [exec vipaccess show]
+set vip_code [exec /home/c/.local/bin/vipaccess]
 set pass [exec cat /etc/p_example.txt]
 set server [exec cat /etc/s_example.txt]
 
