@@ -23,6 +23,12 @@ driver.implicitly_wait(25)
 driver.get("https://thevault.int.thomsonreuters.com")
 assert "Vault" in driver.title
 
+try:
+    elem = driver.find_element_by_xpath("//*[contains(@value,'GO')]")
+    elem.send_keys(Keys.RETURN)
+except:
+    None
+
 elem = driver.find_element_by_xpath("//*[contains(@id,'_txtUsername')]")
 elem.send_keys("UC261016")
 elem = driver.find_element_by_xpath("//*[contains(@id,'_txtPassword')]")
