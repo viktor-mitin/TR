@@ -12,6 +12,7 @@ import subprocess
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import *
 
 #from selenium.webdriver.firefox.options import Options
 #options = Options()
@@ -32,12 +33,13 @@ driver.implicitly_wait(7)
 #driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 't')
 driver.get(url)
 
-#try:
-elem = driver.find_element_by_xpath("//*[contains(@id,'SignInButton')]")
-elem.click()
-print("no exception")
-#except:
-#    None
+try:
+    elem = driver.find_element_by_xpath("//*[contains(@id,'SignInButton')]")
+    elem.click()
+#except NoSuchElementException as e:
+except Exception as e:
+    print("exception happened")
+    print(str(e))
 
 #time.sleep(2)
 #try:
