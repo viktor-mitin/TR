@@ -38,7 +38,15 @@ try:
     elem.click()
 #except NoSuchElementException as e:
 except Exception as e:
-    print("exception happened")
+    print("------ exception happened: SignInButton")
+    print(str(e))
+
+try:
+    elem = driver.find_element_by_xpath("//*[contains(@id,'idp_GoButton')]")
+    elem.click()
+#except NoSuchElementException as e:
+except Exception as e:
+    print("------ exception happened: idp_GoButton")
     print(str(e))
 
 #time.sleep(2)
@@ -54,12 +62,12 @@ with open(file_path, 'r') as file:
 elem.send_keys(p)
 elem.send_keys(Keys.RETURN)
 
-print("entered credentials")
-elem = driver.find_element_by_xpath("//input[contains(@id,'idp_GoButton')]")
-elem.click()
-print("clicked go button")
-#except:
-#    None
+#print("entered credentials")
+#elem = driver.find_element_by_xpath("//input[contains(@id,'idp_GoButton')]")
+#elem.click()
+#print("clicked go button")
+##except:
+##    None
 
 #time.sleep(3)
 #driver.close()
