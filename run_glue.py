@@ -8,7 +8,7 @@ import boto3
 from pprint import pprint
 
 job_name=sys.argv[1]
-sleep_time=4
+sleep_time=14
 
 #job run id, example 'jr_99c5a6cf35370c1a2679b6e4393c5e5158866d025fdb6c55954f05a2061105d2'
 jr='not set'
@@ -50,7 +50,7 @@ while True:
 state=glue.get_job_run(JobName=job_name, RunId=jr)['JobRun']['JobRunState']
 print(state)
 if state == 'FAILED':
-    print_log_group_output('/aws-glue/python-jobs/error', jr)
+    print_log_group_output('/aws-glue/jobs/error', jr)
 
-print_log_group_output('/aws-glue/python-jobs/output', jr)
+print_log_group_output('/aws-glue/jobs/output', jr)
 
