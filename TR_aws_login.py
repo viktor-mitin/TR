@@ -27,6 +27,10 @@ options = webdriver.ChromeOptions()
 #options.add_argument('--headless')
 #options.add_argument('--profile-directory=Default')
 options.add_argument("user-data-dir=/home/c/.config/google-chrome") #Path to your chrome profile
+
+#disable "Chrome is being controlled by automated test software" notification
+options.add_experimental_option("excludeSwitches", ['enable-automation']);
+
 driver = webdriver.Chrome(chrome_options=options)
 
 driver.implicitly_wait(7)
