@@ -33,7 +33,7 @@ options.add_experimental_option("excludeSwitches", ['enable-automation']);
 
 driver = webdriver.Chrome(chrome_options=options)
 
-driver.implicitly_wait(7)
+driver.implicitly_wait(9)
 #driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 't')
 driver.get(url)
 
@@ -42,8 +42,9 @@ try:
     elem.click()
 #except NoSuchElementException as e:
 except Exception as e:
-    print("------ exception happened: SignInButton")
-    print(str(e))
+    pass #ignore for now since this button may not appear sometimes
+#    print("------ exception happened: SignInButton")
+#    print(str(e))
 
 try:
     elem = driver.find_element_by_xpath("//*[contains(@id,'idp_GoButton')]")
