@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 
 date
 
@@ -13,15 +13,11 @@ fi
 echo Vault login to cloud-tool
 
 ### default profile
-#~/.local/bin/cloud-tool -vv vault-login  -m `/home/c/.local/bin/vipaccess` \
-#          --account-id '074929092668' --role 'human-role/a205718-PowerUser2'
-
-### tr-authorities-preprod profile
-~/.local/bin/cloud-tool -vv --profile tr-authorities-preprod vault-login  -m `/home/c/.local/bin/vipaccess` \
+~/.local/bin/cloud-tool -vv vault-login  -m `/home/c/.local/bin/vipaccess` \
           --account-id '074929092668' --role 'human-role/a205718-PowerUser2'
 
 ### tr-authorities-preprod profile
-~/.local/bin/cloud-tool -vv vault-login  -m `/home/c/.local/bin/vipaccess` \
+~/.local/bin/cloud-tool -vv --profile tr-authorities-preprod vault-login  -m `/home/c/.local/bin/vipaccess` \
           --account-id '074929092668' --role 'human-role/a205718-PowerUser2'
 
 echo Get vault pass
