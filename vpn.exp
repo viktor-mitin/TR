@@ -15,7 +15,7 @@ eval spawn /opt/cisco/anyconnect/bin/vpn connect $server
 
 expect "2)" { send "2\r" }
 expect "Username: " { send "\r" }
-expect "Password: " { send $pass\r" }
+expect "Password: " { send "$pass\r" }
 expect "Second "    { send "$vip_code\r" }
 expect "accept? "   { send "y\r" }
 
