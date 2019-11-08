@@ -20,8 +20,8 @@
 ### The first parameter is profile name option - optional.
 cloud_tool_login ()
 {
-    ~/.local/bin/cloud-tool -vvv vault-login $1 \
-              -m `/home/c/.local/bin/vipaccess` \
+    ~/.local/bin/cloud-tool -vvv $1
+              vault-login -m `/home/c/.local/bin/vipaccess` \
               --account-id '074929092668' --role 'human-role/a205718-PowerUser2'
 }
 
@@ -46,7 +46,7 @@ echo Vault login to cloud-tool
 cloud_tool_login
 
 ### tr-authorities-preprod profile
-cloud_tool_login "--profile tr-authorities-preprod vault-login"
+cloud_tool_login "--profile tr-authorities-preprod"
 
 
 echo Get vault pass
