@@ -20,7 +20,7 @@
 ### The first parameter is profile name option - optional.
 cloud_tool_login ()
 {
-    ~/.local/bin/cloud-tool -vvv $1
+    ~/.local/bin/cloud-tool -vvv $1 \
               vault-login -m `/home/c/.local/bin/vipaccess` \
               --account-id '074929092668' --role 'human-role/a205718-PowerUser2'
 }
